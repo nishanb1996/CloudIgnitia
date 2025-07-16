@@ -40,9 +40,9 @@ export function renderAboutPage(container) {
         <div class="about-content">
           <div class="about-text slide-in-left">
             <h2>Our Story</h2>
-            <p>Founded in 2020, CloudOps Solutions emerged from a vision to help businesses harness the full potential of cloud computing and modern DevOps practices. Our team of experienced engineers and consultants recognized the growing need for reliable, scalable, and secure cloud solutions.</p>
-            <p>Founded in 2020, Nishan IT emerged from a vision to help businesses harness the full potential of cloud computing and modern DevOps practices. Our team of experienced engineers and consultants recognized the growing need for reliable, scalable, and secure cloud solutions.</p>
-            <p>Today, we serve over 150 clients worldwide, from innovative startups to established enterprises, helping them transform their technology infrastructure and accelerate their digital transformation journey.</p>
+            <p>Founded in 2023, CloudOps Solutions emerged from a vision to help businesses harness the full potential of cloud computing and modern DevOps practices. Our team of experienced engineers and consultants recognized the growing need for reliable, scalable, and secure cloud solutions.</p>
+            <p>Founded in 2023, ClouIgnitia emerged from a vision to help businesses harness the full potential of cloud computing and modern DevOps practices. Our team of experienced engineers and consultants recognized the growing need for reliable, scalable, and secure cloud solutions.</p>
+            <p>Today, we serve over 50 clients worldwide, from innovative startups to established enterprises, helping them transform their technology infrastructure and accelerate their digital transformation journey.</p>
           </div>
           
           <div class="about-image slide-in-right">
