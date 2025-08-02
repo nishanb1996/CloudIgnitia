@@ -1,9 +1,10 @@
-name: Deploy Vite App to GitHub Pages
+# Deploy Vite App to GitHub Pages
+name: Deploy Vite App
 
 on:
   push:
-    branches:
-      - main  # or use your default branch
+    branches: ["main"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,13 +13,17 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -26,24 +31,17 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build the Vite App
+      - name: Build Vite app
         run: npm run build
 
-      - name: Upload Build Artifacts
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload dist to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: 'dist'
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
