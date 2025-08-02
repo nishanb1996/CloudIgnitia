@@ -1,0 +1,65 @@
+✅ Final Deployment Guide: Vite + PM2 + Nginx on Ubuntu
+
+🔁 Step 1: Build the Vite App
+----------------------------------
+From your project folder:
+    npm install       # installs dependencies
+    npm run build     # builds the app into dist/
+
+🚀 Step 2: Start the App on Port 5000 Using PM2
+--------------------------------------------------
+Install `serve` if you haven’t:
+    npm install -g serve
+
+Start the app with pm2:
+    sudo npm install -g pm2
+    pm2 start "serve -s dist -l 5000" --name nishan-it
+
+Check it’s running:
+    pm2 list
+
+Optional: Keep it running after reboot:
+    pm2 startup
+    # Follow the output (copy and paste the generated command)
+    pm2 save
+
+🌐 Step 3: Install Nginx
+---------------------------
+    sudo apt update
+    sudo apt install nginx -y
+
+⚙️ Step 4: Create Nginx Config
+-------------------------------
+    sudo nano /etc/nginx/sites-available/nishan-it
+
+Paste this config:
+    server {
+        listen 80;
+        server_name yourdomain.com;  # or use your server IP
+
+        location / {
+            proxy_pass http://localhost:5000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+    }
+
+🔗 Step 5: Enable the Site
+----------------------------
+    sudo ln -s /etc/nginx/sites-available/nishan-it /etc/nginx/sites-enabled/
+    sudo rm /etc/nginx/sites-enabled/default  # optional
+
+✅ Step 6: Test and Reload Nginx
+---------------------------------
+    sudo nginx -t
+    sudo systemctl reload nginx
+
+📡 Step 7: Access Your Site
+-----------------------------
+Now open in your browser:
+    http://<your-server-ip>
+    or
+    http://yourdomain.com

@@ -10,9 +10,7 @@
     "start": "serve -s dist -l 5000"
   },
   "dependencies": {
-    "serve": "^14.2.0",
+    "serve": "^14.2.4",
     "vite": "^7.0.4"
   }
 }
-
-
